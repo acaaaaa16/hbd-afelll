@@ -1,59 +1,116 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Afell 💖</title>
+
 <style>
-body{
+body {
   margin:0;
-  background:black;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  overflow:hidden;
   color:white;
   text-align:center;
-  font-family:sans-serif;
 }
-img{
-  width:200px;
+
+/* foto */
+img {
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid white;
   margin:10px;
 }
-</style>
-</head>
 
+/* teks */
+.text {
+  font-size:18px;
+  max-width:90%;
+  margin:auto;
+  margin-top:20px;
+  line-height:1.6;
+}
+
+/* typing */
+.typing::after {
+  content:"|";
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  50% {opacity:0;}
+}
+
+/* tombol */
+button {
+  margin-top:20px;
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:white;
+  color:#ff4d6d;
+  font-weight:bold;
+}
+
+/* confetti */
+.confetti {
+  position:fixed;
+  width:10px;
+  height:10px;
+  background:red;
+  top:0;
+  animation:fall 3s linear infinite;
+}
+@keyframes fall {
+  to {
+    transform:translateY(100vh) rotate(360deg);
+  }
+}
+</style>
+
+</head>
 <body>
 
-<h1>💖 Happy Birthday Sayang 💖</h1>
+<h2>🎉 Happy Level Up Afell 💖</h2>
 
 <img src="foto1.jpg">
 <img src="foto2.jpg">
 
-<p id="text"></p>
+<div class="text typing" id="text"></div>
 
-<button onclick="start()">Klik 💖</button>
-<button onclick="playMusic()">Play 🎶</button>
+<button onclick="playMusic()">Klik buat denger lagu 🎶</button>
 
-<audio id="music">
-  <source src="music.mp3">
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mp3">
 </audio>
 
 <script>
-let text="haiii afellll sayanggg, happy level up yaa sayanggg ❤️";
+const text = "haiii afellll sayanggg, happy level up yaa sayanggg, semogaa apa yang afelll inginkan segera tercapai, semoga di umur 18 tahun ini kamu bisa jadi pribadi yang lebih baik lagi ya sayangg, lebih dewasa, lebih kuat, dan tetap semangat buat masa depan 💖 aca selalu doain kamu disini sayanggg";
+
 let i=0;
-
-function start(){
-  document.getElementById("text").innerHTML="";
-  i=0;
-  ketik();
-}
-
-function ketik(){
-  if(i<text.length){
-    document.getElementById("text").innerHTML+=text[i];
+function type(){
+  if(i < text.length){
+    document.getElementById("text").innerHTML += text.charAt(i);
     i++;
-    setTimeout(ketik,50);
+    setTimeout(type,40);
   }
 }
+type();
 
 function playMusic(){
   document.getElementById("music").play();
+}
+
+/* confetti */
+for(let i=0;i<50;i++){
+  let div=document.createElement("div");
+  div.className="confetti";
+  div.style.left=Math.random()*100+"vw";
+  div.style.background="hsl("+Math.random()*360+"deg,100%,50%)";
+  div.style.animationDuration=(Math.random()*3+2)+"s";
+  document.body.appendChild(div);
 }
 </script>
 
