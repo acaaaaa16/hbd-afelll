@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Sayang 💖</title>
+
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+img {
+  width: 200px;
+  border-radius: 20px;
+  margin: 10px;
+  box-shadow: 0 0 25px pink;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-10px);}
+}
+
+#text {
+  font-size: 18px;
+  padding: 20px;
+  min-height: 120px;
+}
+
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  background: pink;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.heart {
+  position: absolute;
+  color: pink;
+  animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+  0% {transform: translateY(-100px);}
+  100% {transform: translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <img src="foto1.jpg">
+  <img src="foto2.jpg">
+  
+  <div id="text"></div>
+
+  <button onclick="start()">Klik ya sayang 💖</button>
+  <button onclick="playMusic()">Play Music 🎶</button>
+</div>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+let message = "haiii afellll sayanggg, happy level up yaa sayanggg, semogaa apa yang afelll inginkan segera tercapai, semoga di umur 18 tahun ini kamu bisa jadi pribadi yang lebih baik lagi ya sayangg? lebih bisa berfikir secara dewasa, lebih bisa bertindak secara dewasa aamiinn, tetap semangat buat membangunn masa depan dan jangan menyerah buat jadi orang sukses aca doakan selalu disini sayanggg semangat yaaaaw ❤️";
+
+let i = 0;
+
+function start(){
+  document.getElementById("text").innerHTML = "";
+  i = 0;
+  typeWriter();
+}
+
+function typeWriter(){
+  if(i < message.length){
+    document.getElementById("text").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeWriter, 35);
+  }
+}
+
+function playMusic(){
+  document.getElementById("music").play();
+}
+
+// efek love jatuh
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = Math.random()*20 + 10 + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 5000);
+}, 300);
+</script>
+
+</body>
+</html>
