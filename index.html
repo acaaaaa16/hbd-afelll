@@ -3,112 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HBD AFELL 💖</title>
+<title>Happy Birthday ❤️</title>
 
 <style>
 body {
-  margin:0;
-  font-family:sans-serif;
-  text-align:center;
-  background: linear-gradient(135deg,#ff758c,#ff7eb3);
-  color:white;
-  overflow:hidden;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+}
+
+/* teks tengah */
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
 }
 
 h1 {
-  margin-top:30px;
+    font-size: 40px;
+    animation: zoom 2s infinite alternate;
 }
 
+@keyframes zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
+}
+
+/* foto */
 img {
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  margin:10px;
-  border:3px solid white;
-  object-fit:cover;
+    width: 200px;
+    border-radius: 20px;
+    margin-top: 20px;
+    animation: float 3s infinite;
 }
 
-/* typing effect */
-#text {
-  margin:20px;
-  font-size:18px;
-  min-height:120px;
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
 }
 
-/* button */
-button {
-  padding:10px 20px;
-  border:none;
-  border-radius:20px;
-  background:white;
-  color:#ff4d6d;
-  font-weight:bold;
+/* heart animasi */
+.heart {
+    position: absolute;
+    color: pink;
+    animation: naik 5s linear infinite;
 }
 
-/* confetti */
-.confetti {
-  position:fixed;
-  width:8px;
-  height:8px;
-  top:0;
-  animation:fall linear infinite;
-}
-
-@keyframes fall {
-  to {
-    transform:translateY(100vh) rotate(360deg);
-  }
+@keyframes naik {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
 }
 </style>
-
 </head>
+
 <body>
 
-<h1>🎉 Happy Birthday Sayang 💖</h1>
-
-<img src="foto1.jpg">
-<img src="foto2.jpg">
-
-<div id="text"></div>
-
-<button onclick="playMusic()">Play Music 🎶</button>
-
-<audio id="music">
-  <source src="music.mp3" type="audio/mp3">
+<!-- musik -->
+<audio autoplay loop>
+    <source src="music.mp3" type="audio/mp3">
 </audio>
 
+<!-- isi -->
+<div class="center">
+    <h1>🎉 Happy Birthday 🎂</h1>
+    <p>Untuk kamu yang paling spesial 💖</p>
+    <img src="foto1.jpg">
+</div>
+
+<!-- JS animasi -->
 <script>
-// typing effect
-const message = "haiii afellll sayanggg, happy level up yaa sayanggg, semogaa semua impian kamu tercapai, jadi pribadi yang lebih dewasa, dan tetap semangat yaa 💖 aca selalu doain kamu";
 
-let index = 0;
+// bikin heart random
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
 
-function startTyping() {
-  if (index < message.length) {
-    document.getElementById("text").innerHTML += message.charAt(index);
-    index++;
-    setTimeout(startTyping, 50);
-  }
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 30 + 20 + "px";
+    heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
 }
 
-window.onload = function() {
-  startTyping();
+setInterval(createHeart, 200);
 
-  // confetti
-  for (let i = 0; i < 40; i++) {
-    let c = document.createElement("div");
-    c.className = "confetti";
-    c.style.left = Math.random()*100 + "vw";
-    c.style.background = "hsl(" + Math.random()*360 + ",100%,50%)";
-    c.style.animationDuration = (Math.random()*3 + 2) + "s";
-    document.body.appendChild(c);
-  }
+// efek teks muncul (typing)
+const text = "Semoga selalu bahagia yaa 💕";
+let i = 0;
+
+const p = document.querySelector("p");
+p.innerHTML = "";
+
+function ketik() {
+    if (i < text.length) {
+        p.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(ketik, 70);
+    }
 }
 
-// music
-function playMusic(){
-  document.getElementById("music").play();
-}
+ketik();
+
 </script>
 
 </body>
